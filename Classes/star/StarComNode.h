@@ -20,6 +20,10 @@ public:
 	
 	Sprite* getSprite() { return _showSprite; };
 
+	// 是否被选中
+	bool is_slected;
+	// 是否已经遍历过
+	bool is_check;
 private:
 	Sprite* _showSprite;
 };
