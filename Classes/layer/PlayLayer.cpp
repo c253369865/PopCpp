@@ -1,20 +1,19 @@
 
-#include "StartLayer.h"
+#include "PlayLayer.h"
 #include "VisibleRect.h"
 #include "util/LogUtil.h"
-#include "util/LayerUtil.h"
-#include "PlayLayer.h"
+#include "StarLayer.h"
 
-StartLayer::StartLayer()
+PlayLayer::PlayLayer()
 {
 }
 
-StartLayer::~StartLayer()
+PlayLayer::~PlayLayer()
 {
 
 }
 
-bool StartLayer::init()
+bool PlayLayer::init()
 {
 	//////////////////////////////
 	// 1. super init first
@@ -34,7 +33,7 @@ bool StartLayer::init()
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
-		CC_CALLBACK_1(StartLayer::menuCloseCallback, this));
+		CC_CALLBACK_1(PlayLayer::menuCloseCallback, this));
 
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
@@ -50,7 +49,7 @@ bool StartLayer::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	auto label = Label::createWithTTF("Loading...", "fonts/Marker Felt.ttf", 24);
+	auto label = Label::createWithTTF("Play...", "fonts/Marker Felt.ttf", 24);
 
 	// position the label on the center of the screen
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -69,22 +68,18 @@ bool StartLayer::init()
 	//this->addChild(sprite, 0);
 
 	// add start button
-	MenuItemFont *startItem = MenuItemFont::create("start", [](Ref* sender){
-		LogUtil::d("start...");
-		auto scene = LayerUtil::getSceneWithLayer(PlayLayer::create());
-		Director::getInstance()->pushScene(scene);
-	});
-	startItem->setPosition(VisibleRect::center());
-	menu->addChild(startItem);
+	/*MenuItemFont *startItem = MenuItemFont::create("Play", [](Ref* sender){
+		LogUtil::d("Play...");
+		});
+		startItem->setPosition(VisibleRect::center());
+		menu->addChild(startItem);*/
+
+	addChild(StarLayer::create());
 
 	return true;
 }
 
-void StartLayer::menuCloseCallback(Ref* pSender)
+void PlayLayer::menuCloseCallback(Ref* pSender)
 {
-	Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	exit(0);
-#endif
+	Director::getInstance()->popScene();
 }
