@@ -173,6 +173,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\util\LayerUtil.h" />
     <ClInclude Include="..\Classes\util\LogUtil.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
+    <ClInclude Include="..\log.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

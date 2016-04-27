@@ -20,8 +20,28 @@ public:
 	CREATE_FUNC(StarLayer);
 
 protected:
+	void checkAllStarSelected();
+	void resetStarStatus();
+	void setOneStar(StarComNode* star1, StarComNode* star2); // 检查两个星星是否相同类,
+protected:
+	// 界面显示的10x10的星星二维数组
+	/*
+	(x, y)
+	(y轴)
+	0,9 ---------- 9,9
+	-				-
+	-				-
+	-				-
+	-				-
+	-				-
+	0,0 ---------- 9,0 (x轴)
+	遍历:
+	1. 初始化(new)
+	2. 遍历输出
+	3. 重设状态
+	4. 清除(delete)
+	*/
 	StarComNode* _stars[COW][COW];
-	Sprite* _starSprs[COW][COW];
-	StarComNode* _starsList[COW*COW];
-	std::vector<std::vector<StarComNode*>> _starsVector;
+	// 点击时的缓存记录
+	std::vector<StarComNode*> _needCheckStarVector;
 };

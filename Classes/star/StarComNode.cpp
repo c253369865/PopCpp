@@ -6,8 +6,12 @@
 #define random(x) (rand()%x)
 
 StarComNode::StarComNode()
+: is_check(false)
+, is_slected(false)
+, type_idx(0)
+, clickPos(-1, -1)
 {
-
+	init();
 }
 
 StarComNode::~StarComNode()
@@ -17,13 +21,14 @@ StarComNode::~StarComNode()
 
 bool StarComNode::init()
 {
-	if (!Node::init())
+	/*if (!Node::init())
 	{
-		return false;
-	}
+	return false;
+	}*/
 
 	char fileName[255];
-	sprintf_s(fileName, "star/star_%d.png", random(5) + 1);
+	type_idx = random(5) + 1;
+	sprintf_s(fileName, "star/star_%d.png", type_idx);
 	//LogUtil::d(fileName);
 
 	_showSprite = Sprite::create(fileName);

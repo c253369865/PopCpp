@@ -8,7 +8,24 @@
 
 USING_NS_CC;
 
-class StarComNode : public Node
+enum class StarType {
+	
+	
+};
+
+typedef struct _clickPos
+{
+	int x;
+	int y;
+
+	_clickPos(int i, int j)
+	{
+		this->x = i;
+		this->y = j;
+	}
+}ClickPos;
+
+class StarComNode
 {
 public:
 	StarComNode();
@@ -16,7 +33,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(StarComNode);
+	//CREATE_FUNC(StarComNode);
 	
 	Sprite* getSprite() { return _showSprite; };
 
@@ -24,6 +41,11 @@ public:
 	bool is_slected;
 	// 是否已经遍历过
 	bool is_check;
+	// 类型索引
+	int type_idx;
+	// 在界面的位置
+	Vec2 location;
+	ClickPos clickPos;
 private:
 	Sprite* _showSprite;
 };

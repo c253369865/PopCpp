@@ -113,6 +113,7 @@
     <ClInclude Include="..\Classes\star\StarComNode.h">
       <Filter>src\star</Filter>
     </ClInclude>
+    <ClInclude Include="..\log.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
