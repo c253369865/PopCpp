@@ -3,6 +3,7 @@
 #include "VisibleRect.h"
 #include "util/LogUtil.h"
 #include "StarLayer.h"
+#include "mgr/PlayMgr.h"
 
 PlayLayer::PlayLayer()
 {
@@ -10,7 +11,8 @@ PlayLayer::PlayLayer()
 
 PlayLayer::~PlayLayer()
 {
-
+	LogUtil::d("PlayLayer::~PlayLayer()");
+	PlayMgr::destoryInstance();
 }
 
 bool PlayLayer::init()
@@ -74,7 +76,13 @@ bool PlayLayer::init()
 		startItem->setPosition(VisibleRect::center());
 		menu->addChild(startItem);*/
 
-	addChild(StarLayer::create());
+	starLayer = StarLayer::create();
+	addChild(starLayer);
+
+	uiLayer = PlayUILayer::create();
+	addChild(uiLayer);
+
+	PlayMgr::instance()->uiLayer = uiLayer;
 
 	return true;
 }

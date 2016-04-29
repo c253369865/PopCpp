@@ -44,4 +44,16 @@ protected:
 	StarComNode* _stars[COW][COW];
 	// 点击时的缓存记录
 	std::vector<StarComNode*> _needCheckStarVector;
+	// 相同颜色的星星总数
+	int sameStarCount;
+};
+
+class StarLayerUI : public BaseLayer
+{
+public:
+	StarLayerUI(){};
+	~StarLayerUI(){};
+
+private:
+
 };

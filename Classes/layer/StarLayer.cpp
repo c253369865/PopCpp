@@ -3,8 +3,11 @@
 #include "VisibleRect.h"
 #include "star/StarComNode.h"
 #include "util/LogUtil.h"
+#include "Constants.h"
+#include "mgr/PlayMgr.h"
 
 StarLayer::StarLayer()
+: sameStarCount(0)
 {
 }
 
@@ -130,6 +133,7 @@ void StarLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 						starNode->is_check = true;
 						_needCheckStarVector.clear();
 						_needCheckStarVector.push_back(starNode);
+						sameStarCount = 1;
 						checkAllStarSelected();
 
 						find = true;
@@ -171,6 +175,7 @@ void StarLayer::resetStarStatus()
 			}
 		}
 	}
+	sameStarCount = 0;
 }
 
 void StarLayer::checkAllStarSelected()
@@ -223,33 +228,57 @@ void StarLayer::checkAllStarSelected()
 
 	// 遍历输出所有对象
 	// 从上到下,从左到右
-	char ch[1024];
-	for (int j = COW - 1; j >= 0; j--)
+	/*
+	1. 点中的消失,并产生分数
+		消失由star完成,设置属性
+		产生粒子效,分数漂移果由starlayer处理,star返回所在位置,
+		star消失顺序由starlayer安排
+	2. 上面的落下来,右边的左移
+		遍历的时候,把消失的star,上面需要下移的star,粒子效,分数等的动画时序安排好,这样就不用添加下移队列了,
+		关闭点击-->消失+粒子-->然后下移-->检查是否达标-->检查是否还有可以点击的-->判断打开点击(动画完成,重置状态后再打开)
+	3. 动画过程无法点击由starlayer控制
+	4. starlayer存在太多逻辑处理,如星星初始化,判断点击,安排动画等，可以考虑添加逻辑辅助类来处理
+	*/
+
+	float curBeginAnimTime = 0;
+	int score = 0;
+	if (sameStarCount >= 2)
 	{
-		sprintf_s(ch, "");
-
-		for (int i = 0; i < COW; i++)
+		char ch[1024];
+		for (int j = COW - 1; j >= 0; j--)
 		{
-			StarComNode* starNode = _stars[i][j];
-			if (starNode)
-			{
-				char ch1[255];
-				sprintf_s(ch1, "%d ", starNode->is_slected);
-				strcat_s(ch, ch1);
-			}
-		}
+			sprintf_s(ch, "");
 
-		LogUtil::d(ch);
+			for (int i = 0; i < COW; i++)
+			{
+				StarComNode* starNode = _stars[i][j];
+				if (starNode)
+				{
+					char ch1[255];
+					sprintf_s(ch1, "%d ", starNode->is_slected);
+					strcat_s(ch, ch1);
+					//
+					if (starNode->is_slected)
+					{
+						//starNode->startDisappear(curBeginAnimTime, STAR_DISAPPEAR_TIME);
+						PlayMgr::instance()->finishOneStar(starNode, curBeginAnimTime, score);
+						curBeginAnimTime = curBeginAnimTime + STAR_ANIMATE_TIME_INTERVAL;
+						score = score + 20;
+					}
+				}
+			}
+
+			LogUtil::d(ch);
+		}
 	}
 }
 
 // star1 : 被对比的
 void StarLayer::setOneStar(StarComNode* star1, StarComNode* star2)
 {
-	
 	if (star1 && star2)
 	{	
-		if (!star2->is_check) {
+		if (!star2->is_check && star2->is_enable) {
 			if (star1->type_idx == star2->type_idx)
 			{
 				// 找到并相同,设置标记,添加到查找队列中
@@ -259,6 +288,8 @@ void StarLayer::setOneStar(StarComNode* star1, StarComNode* star2)
 				char ch[255];
 				sprintf_s(ch, " same -> x=%d,y=%d ", star2->clickPos.x, star2->clickPos.y);
 				LogUtil::d(ch);
+
+				sameStarCount = sameStarCount + 1;
 			}
 		}
 	}

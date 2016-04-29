@@ -8,6 +8,7 @@
 StarComNode::StarComNode()
 : is_check(false)
 , is_slected(false)
+, is_enable(true)
 , type_idx(0)
 , clickPos(-1, -1)
 {
@@ -35,4 +36,10 @@ bool StarComNode::init()
 	//_showSprite->retain();
 
 	return true;
+}
+
+void StarComNode::startDisappear(float beginTime, float durationTime)
+{
+	_showSprite->setVisible(false);
+	is_enable = false;
 }

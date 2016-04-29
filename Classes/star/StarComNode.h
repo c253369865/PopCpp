@@ -32,15 +32,19 @@ public:
 	virtual ~StarComNode();
 
 	virtual bool init();
-
-	//CREATE_FUNC(StarComNode);
 	
-	Sprite* getSprite() { return _showSprite; };
 
+public:
+	Sprite* getSprite() { return _showSprite; };
+	void startDisappear(float beginTime, float durationTime);
+
+public:
 	// 是否被选中
 	bool is_slected;
 	// 是否已经遍历过
 	bool is_check;
+	// 是否已经被点过并消失了
+	bool is_enable;
 	// 类型索引
 	int type_idx;
 	// 在界面的位置

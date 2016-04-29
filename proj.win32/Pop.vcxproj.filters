@@ -25,6 +25,15 @@
     <Filter Include="resource\star">
       <UniqueIdentifier>{49fae8ce-d6d3-4ed1-a889-4c4a2c92eef0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\logic">
+      <UniqueIdentifier>{dd121a5c-0c8e-4c87-9633-99ef4019e4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\mgr">
+      <UniqueIdentifier>{5acb52d0-2fa6-48a7-b0c3-d6d6fc9592c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\presenter">
+      <UniqueIdentifier>{72fb23b8-d0c6-476e-9f3a-229264c8e9a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +77,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\star\StarComNode.cpp">
       <Filter>src\star</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\logic\PlayLogic.cpp">
+      <Filter>src\logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\mgr\PlayMgr.cpp">
+      <Filter>src\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\layer\PlayUILayer.cpp">
+      <Filter>src\layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +132,18 @@
       <Filter>src\star</Filter>
     </ClInclude>
     <ClInclude Include="..\log.h" />
+    <ClInclude Include="..\Classes\Constants.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\logic\PlayLogic.h">
+      <Filter>src\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\mgr\PlayMgr.h">
+      <Filter>src\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\layer\PlayUILayer.h">
+      <Filter>src\layer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

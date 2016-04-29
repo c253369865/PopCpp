@@ -150,8 +150,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\base\BaseStar.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\layer\PlayLayer.cpp" />
+    <ClCompile Include="..\Classes\layer\PlayUILayer.cpp" />
     <ClCompile Include="..\Classes\layer\StarLayer.cpp" />
     <ClCompile Include="..\Classes\layer\StartLayer.cpp" />
+    <ClCompile Include="..\Classes\logic\PlayLogic.cpp" />
+    <ClCompile Include="..\Classes\mgr\PlayMgr.cpp" />
     <ClCompile Include="..\Classes\star\SimpleStar.cpp" />
     <ClCompile Include="..\Classes\star\StarComNode.cpp" />
     <ClCompile Include="..\Classes\util\LayerUtil.cpp" />
@@ -164,10 +167,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\base\BaseLayer.h" />
     <ClInclude Include="..\Classes\base\BaseSprite.h" />
     <ClInclude Include="..\Classes\base\BaseStar.h" />
+    <ClInclude Include="..\Classes\Constants.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\layer\PlayLayer.h" />
+    <ClInclude Include="..\Classes\layer\PlayUILayer.h" />
     <ClInclude Include="..\Classes\layer\StarLayer.h" />
     <ClInclude Include="..\Classes\layer\StartLayer.h" />
+    <ClInclude Include="..\Classes\logic\PlayLogic.h" />
+    <ClInclude Include="..\Classes\mgr\PlayMgr.h" />
     <ClInclude Include="..\Classes\star\SimpleStar.h" />
     <ClInclude Include="..\Classes\star\StarComNode.h" />
     <ClInclude Include="..\Classes\util\LayerUtil.h" />
