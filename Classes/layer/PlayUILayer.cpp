@@ -18,7 +18,7 @@ bool PlayUILayer::init()
 	label->setPosition(pos);
 	addChild(label);
 
-	// 放着有点不好
+	// 放这有点不好
 	PlayMgr::instance()->scorePos = pos;
 	
 	return true;

@@ -126,7 +126,7 @@ void StarLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 					bool isClick = sprite->getBoundingBox().containsPoint(location);
 					if (isClick)
 					{
-						sprintf_s(ch, "click --> line=%d, cow=%d", i, j);
+						sprintf_s(ch, "click -> x=%d, y=%d", i, j);
 						LogUtil::d(ch);
 
 						starNode->is_slected = true;
@@ -265,24 +265,29 @@ void StarLayer::checkAllStarSelected()
 						curBeginAnimTime = curBeginAnimTime + STAR_ANIMATE_TIME_INTERVAL;
 						score = score + 20;
 
-						// 此星星上面的星星下落（此方式下上面的所有星星类型有：1.没有点中的，2.已经被点过，消失掉的）
-						int k = j;
-						StarComNode* nextNode;
-						do 
-						{
-							k = k + 1;
-							nextNode = _stars[i][k];
-							if (nextNode)
-							{
-								// 切换上下两个星星
-								_stars[i][k-1] = nextNode;
-								nextNode->clickPos = ClickPos(i, k - 1);
-								_stars[i][k] = starNode;
-								starNode->clickPos = ClickPos(i, k);
-								// 下移一位（记录下移开始时间，下移位数）
+						//// 此星星上面的星星下落（此方式下上面的所有星星类型有：1.没有点中的，2.已经被点过，消失掉的）
+						//int k = j;
+						//StarComNode* curNode;
+						//StarComNode* nextNode;
+						//do 
+						//{
+						//	k = k + 1;
+						//	curNode = _stars[i][k-1];
+						//	nextNode = _stars[i][k];
+						//	if (curNode && nextNode)
+						//	{
+						//		// 下移一位（记录下移开始时间，下移位数）
+						//		Sprite* curSprite = nextNode->getSprite();
+						//		curSprite->stopAllActions();
+						//		nextNode->getSprite()->runAction(MoveTo::create(0.5, curNode->getSprite()->getPosition()));
 
-							}
-						} while (k < COW && nextNode && nextNode->is_enable);
+						//		// 切换上下两个星星
+						//		_stars[i][k-1] = nextNode;
+						//		nextNode->clickPos = ClickPos(i, k - 1);
+						//		_stars[i][k] = curNode;
+						//		curNode->clickPos = ClickPos(i, k);
+						//	}
+						//} while (k < COW && nextNode && nextNode->is_enable);
 					}
 				}
 			}
@@ -305,7 +310,7 @@ void StarLayer::setOneStar(StarComNode* star1, StarComNode* star2)
 				_needCheckStarVector.push_back(star2);
 				
 				char ch[255];
-				sprintf_s(ch, " same -> x=%d,y=%d ", star2->clickPos.x, star2->clickPos.y);
+				sprintf_s(ch, " same -> x=%d, y=%d ", star2->clickPos.x, star2->clickPos.y);
 				LogUtil::d(ch);
 
 				sameStarCount = sameStarCount + 1;
