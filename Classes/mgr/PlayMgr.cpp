@@ -33,7 +33,7 @@ void PlayMgr::finishOneStar(StarComNode* star, float beginTime, int score)
 	star->startDisappear(beginTime, STAR_DISAPPEAR_TIME);
 
 	// 飞行的分数
-	if (score > 0)
+	if (score >= 0)
 	{
 		if (uiLayer)
 		{

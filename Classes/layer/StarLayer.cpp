@@ -264,6 +264,25 @@ void StarLayer::checkAllStarSelected()
 						PlayMgr::instance()->finishOneStar(starNode, curBeginAnimTime, score);
 						curBeginAnimTime = curBeginAnimTime + STAR_ANIMATE_TIME_INTERVAL;
 						score = score + 20;
+
+						// 此星星上面的星星下落（此方式下上面的所有星星类型有：1.没有点中的，2.已经被点过，消失掉的）
+						int k = j;
+						StarComNode* nextNode;
+						do 
+						{
+							k = k + 1;
+							nextNode = _stars[i][k];
+							if (nextNode)
+							{
+								// 切换上下两个星星
+								_stars[i][k-1] = nextNode;
+								nextNode->clickPos = ClickPos(i, k - 1);
+								_stars[i][k] = starNode;
+								starNode->clickPos = ClickPos(i, k);
+								// 下移一位（记录下移开始时间，下移位数）
+
+							}
+						} while (k < COW && nextNode && nextNode->is_enable);
 					}
 				}
 			}
